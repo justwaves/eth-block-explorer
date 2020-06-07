@@ -4,16 +4,18 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import loading from './modules/loading';
 import blocks, { blocksSaga } from './modules/blocks';
+import transactions, { transactionsSaga } from './modules/transactions';
 
 const env = process.env.NODE_ENV;
 
 const rootReducer = combineReducers({
   loading,
   blocks,
+  transactions,
 });
 
 export function* rootSaga() {
-  yield all([blocksSaga()]);
+  yield all([blocksSaga(), transactionsSaga()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

@@ -4,6 +4,7 @@ import { createRequestActionTypes } from '../../lib/createRequest';
 import { startLoading, finishLoading } from './loading';
 import web3 from '../../lib/web3API';
 import { fetchBlocks } from '../../lib/utils';
+import { setTransactionList } from './transactions';
 
 const [
   GET_LAST_BLOCK_NUMBER,
@@ -77,7 +78,7 @@ const getBlockByIdSaga = () => {
     try {
       yield put(startLoading(GET_BLOCK_BY_ID));
 
-      const block = yield call(web3.eth.getBlock, id);
+      const block = yield call(web3.eth.getBlock, id, true);
 
       yield put({
         type: GET_BLOCK_BY_ID_SUCCESS,
@@ -85,6 +86,12 @@ const getBlockByIdSaga = () => {
           block,
         },
       });
+
+      const transactionList = block.transactions.filter(
+        transaction => transaction.value > 0 && transaction.to !== null,
+      );
+
+      yield put(setTransactionList({ transactionList }));
     } catch (e) {
       yield put({
         type: GET_BLOCK_BY_ID_FAILURE,
@@ -113,6 +120,7 @@ const initialState = {
   lastBlockNumber: null,
   blockList: [],
   block: null,
+  transactionList: [],
   error: null,
 };
 

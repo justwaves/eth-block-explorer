@@ -7,7 +7,8 @@ import TransactionInfo from './pages/TransactionInfo';
 
 const Routes = () => (
   <Switch>
-    <Route exact path={['/', '/blocks']} component={Blocks} />
+    <Route exact path={['/']} component={Blocks} />
+    {/* <Route path="/block/:id/:hash" component={TransactionInfo} /> */}
     <Route path="/block/:id" component={BlockInfo} />
     <Route path="/transactions/:id" component={Transactions} />
     <Route path="/transaction/:hash" component={TransactionInfo} />
