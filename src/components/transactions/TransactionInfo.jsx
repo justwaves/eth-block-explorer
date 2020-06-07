@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Spinner from '../../components/Spinner';
+import Spinner from 'components/common/Spinner';
 
 const Wrapper = styled.div``;
 
-const TransactionInfoPresenter = ({ loading, error, transaction }) => {
+const TransactionInfo = ({ loading, error, transaction }) => {
   if (loading) {
     return (
       <Wrapper>
@@ -29,4 +29,4 @@ const TransactionInfoPresenter = ({ loading, error, transaction }) => {
   );
 };
 
-export default TransactionInfoPresenter;
+export default TransactionInfo;

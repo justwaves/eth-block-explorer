@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import TransactionInfoPresenter from './TransactionInfoPresenter';
-import { getTransactionByHash } from '../../redux/modules/transactions';
+import { getTransactionByHash } from 'redux/modules/transactions';
+import TransactionInfo from 'components/transactions/TransactionInfo';
 
 const TransactionInfoContainer = () => {
   const { hash } = useParams();
@@ -22,7 +22,7 @@ const TransactionInfoContainer = () => {
 
   return (
     <div>
-      <TransactionInfoPresenter
+      <TransactionInfo
         loading={transactionLoading}
         error={error}
         transaction={transaction}

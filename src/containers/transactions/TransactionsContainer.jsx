@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import TransactionsPresenter from './TransactionsPresenter';
-import { getBlockById } from '../../redux/modules/blocks';
+import { getBlockById } from 'redux/modules/blocks';
+import Transactions from 'components/transactions/Transactions';
 
 const TransactionsContainer = () => {
   const { id } = useParams();
@@ -20,7 +20,7 @@ const TransactionsContainer = () => {
   }, [dispatch, id]);
 
   return (
-    <TransactionsPresenter
+    <Transactions
       transactionList={transactionList}
       error={error}
       loading={transactionListLoading}

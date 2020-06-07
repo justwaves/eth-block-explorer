@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Spinner from '../../components/Spinner';
+import Spinner from 'components/common/Spinner';
 
 const Wrapper = styled.div`
   padding: 3rem;
@@ -10,7 +10,7 @@ const Text = styled.div`
   margin-bottom: 1rem;
 `;
 
-const BlockInfoPresenter = ({ block, error, loading }) => {
+const BlockInfo = ({ block, error, loading }) => {
   if (loading) {
     return (
       <Wrapper>
@@ -42,4 +42,4 @@ const BlockInfoPresenter = ({ block, error, loading }) => {
   );
 };
 
-export default BlockInfoPresenter;
+export default BlockInfo;

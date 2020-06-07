@@ -5,13 +5,14 @@ export default createGlobalStyle`
   ${reset};
     
   body {
-    font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
     min-height: 100%;
     min-width: 360px; 
+    background-color: ${props => props.theme.colors.bg};
   }
 
   * {

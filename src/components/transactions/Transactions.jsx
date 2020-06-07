@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import TagLink from '../../components/TagLink';
-import Pagination from '../../components/Pagination';
-import Spinner from '../../components/Spinner';
-import { toEther } from '../../lib/utils';
+import TagLink from 'components/common/TagLink';
+import Pagination from 'components/common/Pagination';
+import Spinner from 'components/common/Spinner';
+import { toEther } from 'lib/utils';
 
 const Wrapper = styled.div``;
 
@@ -11,7 +11,7 @@ const Text = styled.div``;
 
 const Content = styled.div``;
 
-const TransactionsPresenter = ({ failed, loading, transactionList, id }) => {
+const Transactions = ({ failed, loading, transactionList, id }) => {
   if (loading) {
     return (
       <Wrapper>
@@ -39,7 +39,7 @@ const TransactionsPresenter = ({ failed, loading, transactionList, id }) => {
               <TagLink
                 shorten
                 text={transaction.hash}
-                location={`/transaction/${transaction.hash}`}
+                location={`/block/${id}/${transaction.hash}`}
               />
               <div className="trans-details">
                 <Text>From {transaction.from}</Text>
@@ -56,4 +56,4 @@ const TransactionsPresenter = ({ failed, loading, transactionList, id }) => {
   );
 };
 
-export default TransactionsPresenter;
+export default Transactions;

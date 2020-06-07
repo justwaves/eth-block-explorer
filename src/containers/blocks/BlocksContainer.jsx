@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import BlocksPresenter from './BlocksPresenter';
-import { getLastBlockNumber, getBlockList } from '../../redux/modules/blocks';
+import { getLastBlockNumber, getBlockList } from 'redux/modules/blocks';
+import Blocks from 'components/blocks/Blocks';
 
 const BlocksContainer = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const BlocksContainer = () => {
   }, [dispatch, lastBlockNumber]);
 
   return (
-    <BlocksPresenter
+    <Blocks
       blockList={blockList}
       error={error}
       lastBlockLoading={lastBlockLoading}

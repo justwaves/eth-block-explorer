@@ -15,5 +15,12 @@
     "react/no-danger": 0,
     "func-names": 0,
     "react/jsx-curly-newline": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

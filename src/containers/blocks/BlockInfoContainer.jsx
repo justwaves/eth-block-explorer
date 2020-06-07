@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import BlockInfoPresenter from './BlockInfoPresenter';
-import { getBlockById } from '../../redux/modules/blocks';
+import { getBlockById } from 'redux/modules/blocks';
+import BlockInfo from 'components/blocks/BlockInfo';
 
 const BlockInfoContainer = () => {
   const { id } = useParams();
@@ -17,9 +17,7 @@ const BlockInfoContainer = () => {
     dispatch(getBlockById({ id }));
   }, [dispatch, id]);
 
-  return (
-    <BlockInfoPresenter block={block} error={error} loading={blockLoading} />
-  );
+  return <BlockInfo block={block} error={error} loading={blockLoading} />;
 };
 
 export default BlockInfoContainer;
