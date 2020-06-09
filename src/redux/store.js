@@ -5,6 +5,7 @@ import { all } from 'redux-saga/effects';
 import loading from './modules/loading';
 import blocks, { blocksSaga } from './modules/blocks';
 import transactions, { transactionsSaga } from './modules/transactions';
+import ui from './modules/ui';
 
 const env = process.env.NODE_ENV;
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   loading,
   blocks,
   transactions,
+  ui,
 });
 
 export function* rootSaga() {

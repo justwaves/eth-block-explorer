@@ -1,16 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+`;
 
-const Text = styled.div``;
+const Text = styled.div`
+  font-size: 0.875rem;
+  width: 7rem;
+  text-align: center;
+`;
 
-const Button = styled.button``;
+const Button = styled.button`
+  border: 0;
+  outline: 0;
+  margin: 0 0.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  background-color: white;
+
+  ${props =>
+    props.disabled &&
+    css`
+      color: ${props.theme.colors.gray[3]};
+    `}
+`;
 
 const Content = styled.div``;
 
-const PER_PAGE = 10;
+const PER_PAGE = 7;
 
 const Pagination = ({ items, children }) => {
   const [paginatedItems, setPaginatedItems] = useState([]);
@@ -64,42 +86,39 @@ const Pagination = ({ items, children }) => {
           <Text>No items to show.</Text>
         </div>
       )}
+
       {items.length > 0 && (
         <>
+          <Content>{children(paginatedItems)}</Content>
           <Wrapper>
+            <Button
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+            >
+              first
+            </Button>
+            <Button
+              onClick={() => setCurrentPage(page => page - 1)}
+              disabled={currentPage === 1}
+            >
+              &lt;
+            </Button>
             <Text>
               {`${paginationStartS} - ${paginationEndS} of ${items.length}`}
             </Text>
-            <div>
-              <Button
-                onClick={() => setCurrentPage(1)}
-                disabled={currentPage === 1}
-              >
-                <u>&lt;</u>
-                start
-              </Button>
-              <Button
-                onClick={() => setCurrentPage(page => page - 1)}
-                disabled={currentPage === 1}
-              >
-                &lt; back
-              </Button>
-              <Button
-                onClick={() => setCurrentPage(page => page + 1)}
-                disabled={paginationEndS === items.length}
-              >
-                next &gt;
-              </Button>
-              <Button
-                onClick={onClick}
-                disabled={paginationEndS === items.length}
-              >
-                <u> end &gt;</u>
-              </Button>
-            </div>
+            <Button
+              onClick={() => setCurrentPage(page => page + 1)}
+              disabled={paginationEndS === items.length}
+            >
+              &gt;
+            </Button>
+            <Button
+              onClick={onClick}
+              disabled={paginationEndS === items.length}
+            >
+              last
+            </Button>
           </Wrapper>
-
-          <Content>{children(paginatedItems)}</Content>
         </>
       )}
     </>

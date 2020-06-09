@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
 import PageLayout from 'components/layouts/PageLayout';
 import Block from 'containers/blocks/BlocksContainer';
 import BlockInfo from 'containers/blocks/BlockInfoContainer';
@@ -8,8 +9,10 @@ import TransactionInfo from 'containers/transactions/TransactionInfoContainer';
 
 const Main = () => {
   const { id, hash } = useParams();
-  console.log('id: ', id);
-  console.log('hash: ', hash);
+  // const { transactionsView } = useSelector(({ ui }) => ({
+  //   transactionsView: ui.transactionsView,
+  // }));
+
   return (
     <PageLayout>
       <Block />
@@ -19,6 +22,7 @@ const Main = () => {
           <Transactions />
         </>
       )}
+      {/* {hash && transactionsView && <TransactionInfo />} */}
       {hash && <TransactionInfo />}
     </PageLayout>
   );

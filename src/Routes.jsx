@@ -5,8 +5,8 @@ import Search from 'pages/Search';
 
 const Routes = () => (
   <Switch>
-    <Route path={['/block/:id/:hash', '/block/:id', '/']} component={Main} />
     <Route path="/search" component={Search} />
+    <Route path={['/block/:id/:hash', '/block/:id', '/']} component={Main} />
     <Redirect from="*" to="/" />
   </Switch>
 );

@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from 'components/common/Header';
+// import Header from 'components/common/Header';
 import SideNav from 'components/common/SideNav';
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.colors.bg};
-  width: 100%;
+  width: calc(100%- 3rem);
+  padding-left: 3rem;
 `;
 
 const Main = styled.main`
@@ -15,11 +16,13 @@ const Main = styled.main`
 const Children = styled.div`
   padding: 2.25rem;
   display: flex;
+  margin-left: 3rem;
+  margin-top: 1rem;
 `;
 
 const Layout = ({ children }) => (
   <Wrapper>
-    <Header />
+    {/* <Header /> */}
     <Main>
       <SideNav />
       <Children>{children}</Children>

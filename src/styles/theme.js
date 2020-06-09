@@ -3,13 +3,13 @@ export default {
   colors: {
     bg: '#F6F8F9',
     primary: {
-      1: '#3834E0',
+      1: '#221ECD',
       2: '#2A72E5',
       3: '#176EA8',
     },
     secondary: {
-      1: '#FF4E63',
-      2: '#FF4E63',
+      1: '#FF3D8E',
+      2: '#2AB5C8',
       3: '#FF4E63',
     },
     black: {
@@ -49,4 +49,5 @@ export default {
   },
 
   boxShadow: '0px 4px 8px rgba(158, 158, 158, 0.25)',
+  borderRadius: '0.5rem',
 };

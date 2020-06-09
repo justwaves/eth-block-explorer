@@ -12,17 +12,17 @@ const donutSpin = keyframes`
 
 const SpinnerWrapper = styled.div`
   width: 100%;
-  min-height: calc(100vh - 130px);
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 8rem;
 `;
 
 const SpinnerItem = styled.div`
   display: block;
   border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: grey;
+  border-left-color: ${props => props.theme.colors.black[3]};
   border-radius: 50%;
   width: 32px;
   height: 32px;
