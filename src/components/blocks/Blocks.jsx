@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Pagination from 'components/common/Pagination';
 import ContentLayout from 'components/layouts/ContentLayout';
 import AddressWithIcon from 'components/common/AddressWithIcon';
-import FromNow, { getFromNow } from 'components/common/FromNow';
+import FromNow from 'components/common/FromNow';
 import Toggle from 'components/common/Toggle';
 import Spinner from 'components/common/Spinner';
 
@@ -40,7 +40,7 @@ const ItemWrapper = styled.div`
     `}
 
   ${props =>
-    props.latestBlock &&
+    props.newBlock &&
     css`
       animation: ${donutSpin} 0.3s ease-in;
     `}
@@ -92,32 +92,31 @@ const Timestamp = styled.div`
     `}
 `;
 
-const BlockItem = React.memo(({ item, id, onClick, refresh }) => {
-  const selected = parseInt(id, 10) === item.number;
-  const latestBlock = getFromNow(item.timestamp) === 'a few seconds ago';
-  return (
-    <StyledLink to={`/block/${item.number}`}>
-      <ItemWrapper
-        selected={selected}
-        onClick={onClick}
-        latestBlock={latestBlock}
-      >
-        <div>
-          <BlockNumber selected={selected}>#{item.number}</BlockNumber>
-          <Timestamp selected={selected}>
-            <FromNow timestamp={item.timestamp} refresh={refresh} />
-          </Timestamp>
-        </div>
-        <div>
-          <Miner>
-            <AddressWithIcon address={item.miner} selected={selected} />
-          </Miner>
-          <Txns>{item.transactions.length}txns</Txns>
-        </div>
-      </ItemWrapper>
-    </StyledLink>
-  );
-});
+const BlockItem = React.memo(
+  ({ item, id, onClick, refresh, latestBlockNumber }) => {
+    const selected = parseInt(id, 10) === item.number;
+    const newBlock = item.number >= latestBlockNumber;
+
+    return (
+      <StyledLink to={`/block/${item.number}`}>
+        <ItemWrapper selected={selected} onClick={onClick} newBlock={newBlock}>
+          <div>
+            <BlockNumber selected={selected}>#{item.number}</BlockNumber>
+            <Timestamp selected={selected}>
+              <FromNow timestamp={item.timestamp} refresh={refresh} />
+            </Timestamp>
+          </div>
+          <div>
+            <Miner>
+              <AddressWithIcon address={item.miner} selected={selected} />
+            </Miner>
+            <Txns>{item.transactions.length}txns</Txns>
+          </div>
+        </ItemWrapper>
+      </StyledLink>
+    );
+  },
+);
 
 const Blocks = ({
   id,
@@ -128,7 +127,7 @@ const Blocks = ({
   closeTransactions,
   checked,
   onRealTime,
-  refresh,
+  latestBlockNumber,
 }) => {
   if (!blocksLoading && !lastBlockLoading && !blockList) {
     return (
@@ -154,15 +153,13 @@ const Blocks = ({
     >
       <Pagination items={blockList}>
         {paginatedItems =>
-          paginatedItems.map((block, index) => (
+          paginatedItems.map(block => (
             <BlockItem
               id={id}
               item={block}
-              key={id}
+              key={block.number}
               onClick={closeTransactions}
-              refresh={refresh}
-              index={index}
-              length={blockList.length}
+              latestBlockNumber={latestBlockNumber}
             />
           ))
         }

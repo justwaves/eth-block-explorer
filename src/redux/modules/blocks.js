@@ -13,6 +13,7 @@ const [
 ] = createRequestActionTypes('blocks/GET_LAST_BLOCK_NUMBER');
 
 const SET_LAST_BLOCK_NUMBER = 'blocks/SET_LAST_BLOCK_NUMBER';
+const SET_LATEST_BLOCK_NUMBER = 'blocks/SET_LATEST_BLOCK_NUMBER';
 
 const [
   GET_BLOCK_LIST,
@@ -44,6 +45,13 @@ export const setLastBlockNumber = createAction(
     lastBlockNumber,
   }),
 );
+export const setLatestBlockNumber = createAction(
+  SET_LAST_BLOCK_NUMBER,
+  ({ latestBlockNumber }) => ({
+    latestBlockNumber,
+  }),
+);
+
 export const updateBlockList = createAction(
   UPDATE_BLOCK_LIST,
   ({ newBlockNumber }) => ({ newBlockNumber }),
@@ -141,23 +149,7 @@ const updateBlockListSaga = () => {
       const { blockList } = yield select(state => state.blocks);
       yield delay(3000);
 
-      if (!blockList[0] || !blockList[1]) {
-        const { blockList: currentBlockList } = yield select(
-          state => state.blocks,
-        );
-        console.log('currentBlockList ==', currentBlockList);
-        currentBlockList.filter(block => block !== null);
-        console.log('currentBlockList ==', currentBlockList);
-        yield delay(3000);
-        yield put({
-          type: UPDATE_BLOCK_LIST_SUCCESS,
-          payload: {
-            blockList: currentBlockList,
-          },
-        });
-      }
-
-      if (blockList && blockList[0].number) {
+      if (blockList && blockList.length !== 0 && blockList[0].number) {
         console.log(`Fetch ${blockList[0].number + 1} ~ ${newBlockNumber}`);
         if (blockList[0].number + 1 < newBlockNumber) {
           const latestBlockList = yield call(
@@ -168,24 +160,40 @@ const updateBlockListSaga = () => {
           latestBlockList.filter(block => block !== null);
           console.log(...latestBlockList);
 
+          yield delay(2000);
           const newBlockList = blockList
             .reverse()
             .concat(latestBlockList)
             .reverse();
 
-          yield delay(2000);
           yield put({
             type: UPDATE_BLOCK_LIST_SUCCESS,
             payload: {
               newBlockList,
             },
           });
+          yield put({
+            type: SET_LATEST_BLOCK_NUMBER,
+            payload: {
+              latestBlockNumber: latestBlockList.reverse()[0].number,
+            },
+          });
         } else if (blockList[0].number + 1 >= newBlockNumber) {
           console.log(
-            `!!!Can't fetch ==> ${blockList[0].number + 1} ~ ${newBlockNumber}`,
+            `Can't fetch ==> ${blockList[0].number + 1} ~ ${newBlockNumber}`,
           );
         }
       }
+
+      // if (!blockList[0] || !blockList[1]) {
+      //   const { blockList: currentBlockList } = yield select(
+      //     state => state.blocks,
+      //   );
+      //   currentBlockList.filter(block => block !== null);
+      //   console.log('currentBlockList ==', currentBlockList);
+      //   yield delay(3000);
+      //   yield put(getLastBlockNumber());
+      // }
     } catch (e) {
       console.log(e);
       yield put({
@@ -213,6 +221,7 @@ const initialState = {
   error: null,
   realtime: true,
   newBlockNumber: null,
+  latestBlockNumber: null,
 };
 
 const blocks = handleActions(
@@ -255,6 +264,10 @@ const blocks = handleActions(
     [UPDATE_BLOCK_LIST_FAILURE]: (state, { payload: e }) => ({
       ...state,
       error: e,
+    }),
+    [SET_LATEST_BLOCK_NUMBER]: (state, { payload: { latestBlockNumber } }) => ({
+      ...state,
+      latestBlockNumber,
     }),
   },
   initialState,

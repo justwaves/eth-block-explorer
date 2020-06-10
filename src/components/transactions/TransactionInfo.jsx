@@ -29,7 +29,7 @@ const Content = styled.div``;
 const ItemWrapper = styled.div`
   display: grid;
   margin-top: 2rem;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 6rem 12rem;
   gap: 3rem;
 `;
 
@@ -69,8 +69,14 @@ const TransactionInfo = ({ loading, error, transaction }) => {
             <Number>{shortenAddress(transaction.hash)}</Number>
           </BlockNumber>
           <Content>
-            <Item name="Nonce" value={transaction.blockNumber} />
-            <Item name="Gas Used" value={shortenAddress(transaction.hash)} />
+            <Item name="Hash" value={shortenAddress(transaction.hash)} />
+            <Item name="value" value={transaction.value} />
+            <Item name="BlockNumber" value={transaction.blockNumber} />
+            <Item name="nonce" value={transaction.nonce} />
+            <Item name="from" value={shortenAddress(transaction.from)} />
+            <Item name="to" value={shortenAddress(transaction.to)} />
+            <Item name="gasPrice" value={transaction.gasPrice} />
+            <Item name="gas" value={transaction.gas} />
             <Item
               name="Gas Limit"
               value={shortenAddress(toEther(transaction.value).toFixed(2))}

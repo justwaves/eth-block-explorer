@@ -21,6 +21,7 @@ const BlocksContainer = () => {
     blocksLoading,
     lastBlockLoading,
     realtime,
+    latestBlockNumber,
   } = useSelector(({ blocks, loading }) => ({
     lastBlockNumber: blocks.lastBlockNumber,
     blockList: blocks.blockList,
@@ -28,6 +29,7 @@ const BlocksContainer = () => {
     realtime: blocks.realtime,
     lastBlockLoading: loading['blocks/GET_LAST_BLOCK_NUMBER'],
     blocksLoading: loading['blocks/GET_BLOCK_LIST'],
+    latestBlockNumber: blocks.latestBlockNumber,
   }));
   const [refresh, setRefresh] = useState(0);
   const subscriptionRef = useRef();
@@ -102,6 +104,7 @@ const BlocksContainer = () => {
       onRealTime={onRealTime}
       checked={checked}
       refresh={refresh}
+      latestBlockNumber={latestBlockNumber}
     />
   );
 };
