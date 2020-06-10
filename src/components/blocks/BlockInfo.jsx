@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import ContentLayout from 'components/layouts/ContentLayout';
 import { shortenAddress } from 'lib/utils';
 import { Cube } from 'components/common/Icons';
 import AddressWithIcon from 'components/common/AddressWithIcon';
 
+const Wrapper = styled.div``;
+
 const BlockNumber = styled.h1`
   display: flex;
   align-items: center;
+  align-self: flex-start;
   margin-bottom: 3rem;
 `;
 
@@ -29,8 +33,8 @@ const Content = styled.div``;
 
 const ItemWrapper = styled.div`
   display: grid;
-  margin-top: 2rem;
-  grid-template-columns: 1fr 2fr;
+  margin-top: 1.75rem;
+  grid-template-columns: 6rem 12rem;
   gap: 3rem;
 `;
 
@@ -48,10 +52,9 @@ const ViewTxnsButton = styled.button`
   background: ${props => props.theme.colors.primary[1]};
   color: white;
   padding: 1rem 2rem;
-  margin-top: 4rem;
-  margin-left: 1rem;
+  margin-top: 3rem;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -81,7 +84,7 @@ const BlockInfo = ({
       error={error}
     >
       {block && (
-        <>
+        <Wrapper>
           <BlockNumber>
             <IconContainer>
               <Cube />
@@ -89,23 +92,29 @@ const BlockInfo = ({
             <Number>#{block.number}</Number>
           </BlockNumber>
           <Content>
-            <Item name="nonce" value={block.nonce ? 'Success' : 'Pending'} />
-            <Item name="gasUsed" value={block.gasUsed} />
-            <Item name="gasLimit" value={block.gasLimit} />
-            <Item name="difficulty" value={block.difficulty} />
-            <Item name="blockSize" value={block.size} />
-            <Item name="hash" value={shortenAddress(block.hash)} />
+            <Item name="State" value={block.nonce ? 'Success' : 'Pending'} />
             <Item
-              name="miner"
+              name="Timestamp"
+              value={moment(block.timestamp).format('lll')}
+            />
+            <Item name="Hash" value={shortenAddress(block.hash)} />
+            <Item name="Nonce" value={block.nonce} />
+            <Item name="Size" value={`${block.size} bytes`} />
+            <Item
+              name="Miner"
               value={<AddressWithIcon address={block.miner} />}
             />
-            <Item name="number" value={block.number} />
-            <Item name="timestamp" value={block.timestamp} />
+            <Item name="Gas Used" value={block.gasUsed} />
+            <Item name="Gas Limit" value={block.gasLimit} />
+            <Item name="Difficulty" value={block.difficulty} />
+            {/* <Item name="Extra Data" value={block.extraData} /> */}
+            <Item name="SHA3 Uncles" value={shortenAddress(block.sha3Uncles)} />
+            <Item name="Transactions" value={block.transactions.length} />
           </Content>
           <ViewTxnsButton onClick={viewTransactions}>
             View All Transactions
           </ViewTxnsButton>
-        </>
+        </Wrapper>
       )}
     </ContentLayout>
   );

@@ -15,7 +15,7 @@ const ItemWrapper = styled.div`
   background-color: white;
   margin-bottom: 0.75rem;
   padding: 1.25rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   box-shadow: ${props => props.theme.boxShadow};
   display: flex;
   flex-direction: column;

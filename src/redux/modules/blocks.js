@@ -139,30 +139,52 @@ const updateBlockListSaga = () => {
       yield put(startLoading(UPDATE_BLOCK_LIST));
 
       const { blockList } = yield select(state => state.blocks);
+      yield delay(3000);
 
-      yield delay(2000);
-
-      if (blockList) {
-        const latestBlockList = yield call(
-          fetchBlocks,
-          blockList[0].number + 1,
-          newBlockNumber,
+      if (!blockList[0] || !blockList[1]) {
+        const { blockList: currentBlockList } = yield select(
+          state => state.blocks,
         );
-
-        console.log(latestBlockList);
-
-        const newBlockList = blockList
-          .reverse()
-          .concat(latestBlockList)
-          .reverse();
-        console.log('newBlockList: ', newBlockList);
-
+        console.log('currentBlockList ==', currentBlockList);
+        currentBlockList.filter(block => block !== null);
+        console.log('currentBlockList ==', currentBlockList);
+        yield delay(3000);
         yield put({
           type: UPDATE_BLOCK_LIST_SUCCESS,
           payload: {
-            newBlockList,
+            blockList: currentBlockList,
           },
         });
+      }
+
+      if (blockList && blockList[0].number) {
+        console.log(`Fetch ${blockList[0].number + 1} ~ ${newBlockNumber}`);
+        if (blockList[0].number + 1 < newBlockNumber) {
+          const latestBlockList = yield call(
+            fetchBlocks,
+            blockList[0].number + 1,
+            newBlockNumber,
+          );
+          latestBlockList.filter(block => block !== null);
+          console.log(...latestBlockList);
+
+          const newBlockList = blockList
+            .reverse()
+            .concat(latestBlockList)
+            .reverse();
+
+          yield delay(2000);
+          yield put({
+            type: UPDATE_BLOCK_LIST_SUCCESS,
+            payload: {
+              newBlockList,
+            },
+          });
+        } else if (blockList[0].number + 1 >= newBlockNumber) {
+          console.log(
+            `!!!Can't fetch ==> ${blockList[0].number + 1} ~ ${newBlockNumber}`,
+          );
+        }
       }
     } catch (e) {
       console.log(e);

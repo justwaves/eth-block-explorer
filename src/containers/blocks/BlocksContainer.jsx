@@ -29,6 +29,7 @@ const BlocksContainer = () => {
     lastBlockLoading: loading['blocks/GET_LAST_BLOCK_NUMBER'],
     blocksLoading: loading['blocks/GET_BLOCK_LIST'],
   }));
+  const [refresh, setRefresh] = useState(0);
   const subscriptionRef = useRef();
 
   useEffect(() => {
@@ -78,6 +79,10 @@ const BlocksContainer = () => {
     }
   }, [checked]);
 
+  useEffect(() => {
+    setRefresh(r => r + 1);
+  }, [blockList]);
+
   const closeTransactions = useCallback(() => {
     dispatch(hideTransactions());
   }, [dispatch]);
@@ -96,6 +101,7 @@ const BlocksContainer = () => {
       closeTransactions={closeTransactions}
       onRealTime={onRealTime}
       checked={checked}
+      refresh={refresh}
     />
   );
 };

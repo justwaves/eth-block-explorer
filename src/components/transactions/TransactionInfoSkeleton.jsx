@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { toEther, shortenAddress } from 'lib/utils';
 import ContentLayout from 'components/layouts/ContentLayout';
 import { Transaction } from 'components/common/Icons';
 
@@ -41,45 +40,45 @@ const Key = styled.div`
 const Value = styled.div`
   color: ${props => props.theme.colors.black[3]};
   font-weight: 500;
+  background-color: ${props => props.theme.colors.gray[4]};
+  border-radius: 0.125rem;
+  width: 50%;
 `;
 
-const Item = ({ name, value }) => {
+const Square = styled.div`
+  width: 7.5rem;
+  height: 1.365rem;
+  background: ${props => props.theme.colors.gray[4]};
+  border-radius: 0.25rem;
+`;
+
+const Item = ({ name }) => {
   return (
     <ItemWrapper>
       <Key>{name}</Key>
-      <Value>{value}</Value>
+      <Value />
     </ItemWrapper>
   );
 };
 
-const TransactionInfo = ({ loading, error, transaction }) => {
+const TransactionInfoSkeleton = () => {
   return (
-    <ContentLayout
-      title="Transaction Information"
-      info
-      loading={loading}
-      error={error}
-    >
-      {transaction && (
-        <>
-          <BlockNumber>
-            <IconContainer>
-              <Transaction />
-            </IconContainer>
-            <Number>{shortenAddress(transaction.hash)}</Number>
-          </BlockNumber>
-          <Content>
-            <Item name="Nonce" value={transaction.blockNumber} />
-            <Item name="Gas Used" value={shortenAddress(transaction.hash)} />
-            <Item
-              name="Gas Limit"
-              value={shortenAddress(toEther(transaction.value).toFixed(2))}
-            />
-          </Content>
-        </>
-      )}
+    <ContentLayout title="Transaction Information" info>
+      <BlockNumber>
+        <IconContainer>
+          <Transaction />
+        </IconContainer>
+        <Number>
+          <Square />
+        </Number>
+      </BlockNumber>
+      <Content>
+        <Item name="Nonce" />
+        <Item name="Gas Used" />
+        <Item name="Gas Limit" />
+      </Content>
     </ContentLayout>
   );
 };
 
-export default TransactionInfo;
+export default TransactionInfoSkeleton;

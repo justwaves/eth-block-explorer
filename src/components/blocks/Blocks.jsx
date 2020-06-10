@@ -1,21 +1,31 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Pagination from 'components/common/Pagination';
 import ContentLayout from 'components/layouts/ContentLayout';
 import AddressWithIcon from 'components/common/AddressWithIcon';
-import FromNow from 'components/common/FromNow';
+import FromNow, { getFromNow } from 'components/common/FromNow';
 import Toggle from 'components/common/Toggle';
+import Spinner from 'components/common/Spinner';
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+const donutSpin = keyframes`
+  0% {
+    transform: translate(0, -20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 `;
 
 const ItemWrapper = styled.div`
   background-color: white;
   margin-bottom: 0.75rem;
   padding: 1.25rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   box-shadow: ${props => props.theme.boxShadow};
   display: flex;
   flex-direction: column;
@@ -27,6 +37,12 @@ const ItemWrapper = styled.div`
       background-color: ${props.theme.colors.primary[1]};
       color: white;
       box-shadow: none;
+    `}
+
+  ${props =>
+    props.latestBlock &&
+    css`
+      animation: ${donutSpin} 0.3s ease-in;
     `}
 
   > div {
@@ -76,15 +92,20 @@ const Timestamp = styled.div`
     `}
 `;
 
-const BlockItem = React.memo(({ item, id, onClick }) => {
+const BlockItem = React.memo(({ item, id, onClick, refresh }) => {
   const selected = parseInt(id, 10) === item.number;
+  const latestBlock = getFromNow(item.timestamp) === 'a few seconds ago';
   return (
     <StyledLink to={`/block/${item.number}`}>
-      <ItemWrapper selected={selected} onClick={onClick}>
+      <ItemWrapper
+        selected={selected}
+        onClick={onClick}
+        latestBlock={latestBlock}
+      >
         <div>
           <BlockNumber selected={selected}>#{item.number}</BlockNumber>
           <Timestamp selected={selected}>
-            <FromNow timestamp={item.timestamp} />
+            <FromNow timestamp={item.timestamp} refresh={refresh} />
           </Timestamp>
         </div>
         <div>
@@ -107,7 +128,22 @@ const Blocks = ({
   closeTransactions,
   checked,
   onRealTime,
+  refresh,
 }) => {
+  if (!blocksLoading && !lastBlockLoading && !blockList) {
+    return (
+      <ContentLayout
+        title="Latest Blocks"
+        loading={lastBlockLoading || blocksLoading}
+        error={error}
+        toggle={<Toggle checked={checked} onClick={onRealTime} />}
+        toggleLabel="Real time"
+      >
+        <Spinner />
+      </ContentLayout>
+    );
+  }
+
   return (
     <ContentLayout
       title="Latest Blocks"
@@ -118,12 +154,15 @@ const Blocks = ({
     >
       <Pagination items={blockList}>
         {paginatedItems =>
-          paginatedItems.map(block => (
+          paginatedItems.map((block, index) => (
             <BlockItem
               id={id}
               item={block}
-              key={block.number}
+              key={id}
               onClick={closeTransactions}
+              refresh={refresh}
+              index={index}
+              length={blockList.length}
             />
           ))
         }

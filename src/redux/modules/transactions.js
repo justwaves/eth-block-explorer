@@ -6,6 +6,8 @@ import web3 from '../../lib/web3API';
 
 const SET_TRANSACTION_LIST = 'transactions/SET_TRANSACTION_LIST';
 
+const UNLOAD_TRANSACTION_LIST = 'transactions/UNLOAD_TRANSACTION_LIST';
+
 const [
   GET_TRANSACTION_BY_HASH,
   GET_TRANSACTION_BY_HASH_SUCCESS,
@@ -16,6 +18,8 @@ export const setTransactionList = createAction(
   SET_TRANSACTION_LIST,
   ({ transactionList }) => ({ transactionList }),
 );
+
+export const unloadTransactionList = createAction(UNLOAD_TRANSACTION_LIST);
 
 export const getTransactionByHash = createAction(
   GET_TRANSACTION_BY_HASH,
@@ -74,6 +78,7 @@ const transactions = handleActions(
       ...state,
       error: e,
     }),
+    [UNLOAD_TRANSACTION_LIST]: () => initialState,
   },
   initialState,
 );

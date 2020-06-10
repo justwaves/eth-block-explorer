@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Spinner from 'components/common/Spinner';
 import Toggle from 'components/common/Toggle';
+import BlockInfoSkeleton from 'components/blocks/BlockInfoSkeleton';
+import TransactionInfoSkeleton from 'components/transactions/TransactionInfoSkeleton';
 
 const Wrapper = styled.div`
   width: ${props => props.theme.width.content};
@@ -71,6 +73,18 @@ const ContentLayout = ({
   toggle,
   toggleLabel,
 }) => {
+  if (info && loading) {
+    return (
+      <Wrapper>
+        {title === 'Block Information' ? (
+          <BlockInfoSkeleton />
+        ) : (
+          <TransactionInfoSkeleton />
+        )}
+      </Wrapper>
+    );
+  }
+
   if (loading) {
     return (
       <Wrapper>
