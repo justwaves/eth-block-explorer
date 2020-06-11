@@ -28,7 +28,7 @@ const Content = styled.div``;
 const ItemWrapper = styled.div`
   display: grid;
   margin-top: 2rem;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 7rem 12rem;
   gap: 3rem;
 `;
 
@@ -40,15 +40,15 @@ const Key = styled.div`
 const Value = styled.div`
   color: ${props => props.theme.colors.black[3]};
   font-weight: 500;
-  background-color: ${props => props.theme.colors.gray[4]};
+  background-color: ${props => props.theme.colors.gray[5]};
   border-radius: 0.125rem;
   width: 50%;
 `;
 
 const Square = styled.div`
-  width: 7.5rem;
+  width: 9rem;
   height: 1.365rem;
-  background: ${props => props.theme.colors.gray[4]};
+  background: ${props => props.theme.colors.gray[5]};
   border-radius: 0.25rem;
 `;
 
@@ -73,9 +73,15 @@ const TransactionInfoSkeleton = () => {
         </Number>
       </BlockNumber>
       <Content>
+        <Item name="Hash" />
+        <Item name="From" />
+        <Item name="To" />
+        <Item name="Value" />
+        <Item name="BlockNumber" />
         <Item name="Nonce" />
+        <Item name="Gas Price" />
         <Item name="Gas Used" />
-        <Item name="Gas Limit" />
+        <Item name="Tx Fee" />
       </Content>
     </ContentLayout>
   );

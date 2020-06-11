@@ -9,14 +9,19 @@ import { unloadTransactionList } from 'redux/modules/transactions';
 const BlockInfoContainer = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { block, error, blockLoading, blocksLoading } = useSelector(
-    ({ blocks, loading }) => ({
-      block: blocks.block,
-      error: blocks.error,
-      blockLoading: loading['blocks/GET_BLOCK_BY_ID'],
-      blocksLoading: loading['blocks/GET_BLOCK_LIST'],
-    }),
-  );
+  const {
+    block,
+    error,
+    blockLoading,
+    blocksLoading,
+    transactionListLength,
+  } = useSelector(({ blocks, loading, transactions }) => ({
+    block: blocks.block,
+    error: blocks.error,
+    blockLoading: loading['blocks/GET_BLOCK_BY_ID'],
+    blocksLoading: loading['blocks/GET_BLOCK_LIST'],
+    transactionListLength: transactions.transactionList.length,
+  }));
 
   useEffect(() => {
     dispatch(getBlockById({ id }));
@@ -36,6 +41,7 @@ const BlockInfoContainer = () => {
       loading={blockLoading}
       viewTransactions={viewTransactions}
       blocksLoading={blocksLoading}
+      transactionListLength={transactionListLength}
     />
   );
 };

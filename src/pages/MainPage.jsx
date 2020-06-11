@@ -6,6 +6,8 @@ import Block from 'containers/blocks/BlocksContainer';
 import BlockInfo from 'containers/blocks/BlockInfoContainer';
 import Transactions from 'containers/transactions/TransactionsContainer';
 import TransactionInfo from 'containers/transactions/TransactionInfoContainer';
+import SearchModal from 'components/search/SearchModal';
+import { getCryptocurrencyInfo } from 'lib/api/block';
 
 const Main = () => {
   const { id, hash } = useParams();
@@ -13,8 +15,18 @@ const Main = () => {
   //   transactionsView: ui.transactionsView,
   // }));
 
+  const post = async () => {
+    const {
+      data: { data: cryptocurrencyInfo },
+    } = await getCryptocurrencyInfo();
+
+    console.log('post: ', cryptocurrencyInfo[1]);
+  };
+  post();
+
   return (
     <PageLayout>
+      <SearchModal />
       <Block />
       {id && (
         <>

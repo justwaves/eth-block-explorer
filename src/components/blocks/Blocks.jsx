@@ -14,10 +14,20 @@ const StyledLink = styled(Link)`
 
 const donutSpin = keyframes`
   0% {
-    transform: translate(0, -20px);
+    /* transform: translate(0, -20px); */
+    transform: rotateX(0deg);
+    
   }
+
+  50% {
+    /* transform: translate(0, -20px); */
+    transform: rotateX(180deg);
+    
+  }
+
   100% {
-    transform: translate(0, 0);
+    /* transform: translate(0, 0); */
+    transform: rotateX(0deg);
   }
 `;
 
@@ -95,7 +105,7 @@ const Timestamp = styled.div`
 const BlockItem = React.memo(
   ({ item, id, onClick, refresh, latestBlockNumber }) => {
     const selected = parseInt(id, 10) === item.number;
-    const newBlock = item.number >= latestBlockNumber;
+    const newBlock = !null && item.number >= latestBlockNumber;
 
     return (
       <StyledLink to={`/block/${item.number}`}>

@@ -31,7 +31,7 @@ const Content = styled.div``;
 const ItemWrapper = styled.div`
   display: grid;
   margin-top: 1.75rem;
-  grid-template-columns: 6rem 12rem;
+  grid-template-columns: 7rem 12rem;
   gap: 3rem;
 `;
 
@@ -92,17 +92,18 @@ const BlockInfoSkeleton = () => {
         <Content>
           <Item name="State" />
           <Item name="Timestamp" />
+          <Item name="Miner" />
           <Item name="Hash" />
           <Item name="Nonce" />
           <Item name="Size" />
-          <Item name="Miner" />
           <Item name="Gas Used" />
           <Item name="Gas Limit" />
           <Item name="Difficulty" />
           <Item name="SHA3 Uncles" />
           <Item name="Transactions" />
+          <Item name="Valid Transactions" />
         </Content>
-        <ViewTxnsButton>View All Transactions</ViewTxnsButton>
+        <ViewTxnsButton>View All Valid Transactions</ViewTxnsButton>
       </Wrapper>
     </ContentLayout>
   );

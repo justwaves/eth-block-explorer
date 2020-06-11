@@ -1,9 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Cube } from 'components/common/Icons';
-import { Search, Home } from './Icons';
+import { Cube, Search, Home } from 'components/common/Icons';
+import { showModal } from 'redux/modules/ui';
+import SearchBox from 'components/search/SearchBox';
 
 const Wrapper = styled.div`
   width: ${props => props.theme.width.sideNav};
@@ -23,6 +24,7 @@ const Navigation = styled.nav`
 `;
 
 const IconContainer = styled.a`
+  cursor: pointer;
   & + & {
     margin-top: 4rem;
   }
@@ -40,9 +42,18 @@ const IconContainer = styled.a`
 
 const SideNav = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { blockList } = useSelector(({ blocks }) => ({
     blockList: blocks.blockList,
   }));
+
+  const showSearchModal = () => {
+    dispatch(
+      showModal({
+        content: <SearchBox />,
+      }),
+    );
+  };
 
   let selected;
 
@@ -55,20 +66,22 @@ const SideNav = () => {
   return (
     <Wrapper>
       <Navigation>
-        <IconContainer href="/" selected={selected === 'home'}>
+        <IconContainer selected={selected === 'home'} href="/">
           <Home size={22} />
         </IconContainer>
+
         <IconContainer
           href={blockList && blockList[0] && `/block/${blockList[0].number}`}
           selected={selected === 'block'}
         >
           <Cube size={18} />
         </IconContainer>
-        <IconContainer href="/search" selected={selected === 'search'}>
-          <Search size={22} />
+        <IconContainer selected={selected === 'search'}>
+          <Search size={22} onClick={showSearchModal} />
         </IconContainer>
       </Navigation>
     </Wrapper>
   );
 };
+
 export default SideNav;

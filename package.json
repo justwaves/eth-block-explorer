@@ -6,9 +6,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "lodash.range": "^3.2.0",
     "moment": "^2.26.0",
+    "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet-async": "^1.0.6",
@@ -49,5 +51,6 @@
   "devDependencies": {
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }

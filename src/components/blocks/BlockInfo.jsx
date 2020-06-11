@@ -34,7 +34,7 @@ const Content = styled.div``;
 const ItemWrapper = styled.div`
   display: grid;
   margin-top: 1.75rem;
-  grid-template-columns: 6rem 12rem;
+  grid-template-columns: 7rem 12rem;
   gap: 3rem;
 `;
 
@@ -75,6 +75,7 @@ const BlockInfo = ({
   loading,
   viewTransactions,
   blocksLoading,
+  transactionListLength,
 }) => {
   return (
     <ContentLayout
@@ -97,22 +98,31 @@ const BlockInfo = ({
               name="Timestamp"
               value={moment(block.timestamp).format('lll')}
             />
-            <Item name="Hash" value={shortenAddress(block.hash)} />
-            <Item name="Nonce" value={block.nonce} />
-            <Item name="Size" value={`${block.size} bytes`} />
             <Item
               name="Miner"
-              value={<AddressWithIcon address={block.miner} />}
+              value={<AddressWithIcon address={block.miner} hover />}
             />
+            <Item
+              name="Hash"
+              value={<AddressWithIcon address={block.hash} hover noIcon />}
+            />
+            <Item name="Nonce" value={block.nonce} />
+            <Item name="Size" value={`${block.size} bytes`} />
             <Item name="Gas Used" value={block.gasUsed} />
             <Item name="Gas Limit" value={block.gasLimit} />
             <Item name="Difficulty" value={block.difficulty} />
             {/* <Item name="Extra Data" value={block.extraData} /> */}
-            <Item name="SHA3 Uncles" value={shortenAddress(block.sha3Uncles)} />
+            <Item
+              name="SHA3 Uncles"
+              value={
+                <AddressWithIcon address={block.sha3Uncles} hover noIcon />
+              }
+            />
             <Item name="Transactions" value={block.transactions.length} />
+            <Item name="Valid Transactions" value={transactionListLength} />
           </Content>
           <ViewTxnsButton onClick={viewTransactions}>
-            View All Transactions
+            View All Valid Transactions
           </ViewTxnsButton>
         </Wrapper>
       )}

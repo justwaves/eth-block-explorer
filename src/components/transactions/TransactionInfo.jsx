@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { toEther, shortenAddress } from 'lib/utils';
+import { toEther, toGwei, shortenAddress } from 'lib/utils';
 import ContentLayout from 'components/layouts/ContentLayout';
 import { Transaction } from 'components/common/Icons';
+import AddressWithIcon from 'components/common/AddressWithIcon';
 
 const BlockNumber = styled.h1`
   display: flex;
@@ -29,7 +30,7 @@ const Content = styled.div``;
 const ItemWrapper = styled.div`
   display: grid;
   margin-top: 2rem;
-  grid-template-columns: 6rem 12rem;
+  grid-template-columns: 7rem 12rem;
   gap: 3rem;
 `;
 
@@ -69,17 +70,36 @@ const TransactionInfo = ({ loading, error, transaction }) => {
             <Number>{shortenAddress(transaction.hash)}</Number>
           </BlockNumber>
           <Content>
-            <Item name="Hash" value={shortenAddress(transaction.hash)} />
-            <Item name="value" value={transaction.value} />
-            <Item name="BlockNumber" value={transaction.blockNumber} />
-            <Item name="nonce" value={transaction.nonce} />
-            <Item name="from" value={shortenAddress(transaction.from)} />
-            <Item name="to" value={shortenAddress(transaction.to)} />
-            <Item name="gasPrice" value={transaction.gasPrice} />
-            <Item name="gas" value={transaction.gas} />
             <Item
-              name="Gas Limit"
-              value={shortenAddress(toEther(transaction.value).toFixed(2))}
+              name="Hash"
+              value={
+                <AddressWithIcon address={transaction.hash} hover noIcon />
+              }
+            />
+            <Item
+              name="From"
+              value={<AddressWithIcon address={transaction.from} hover />}
+            />
+            <Item
+              name="To"
+              value={<AddressWithIcon address={transaction.to} hover />}
+            />
+            <Item
+              name="Value"
+              value={`${toEther(transaction.value).toFixed(4)} Eth`}
+            />
+            <Item name="BlockNumber" value={`#${transaction.blockNumber} `} />
+            <Item name="Nonce" value={transaction.nonce} />
+            <Item
+              name="Gas Price"
+              value={`${toGwei(transaction.gasPrice)} Gwei`}
+            />
+            <Item name="Gas Used" value={transaction.gas} />
+            <Item
+              name="Tx Fee"
+              value={`${toEther(transaction.gasPrice * transaction.gas).toFixed(
+                6,
+              )} Eth`}
             />
           </Content>
         </>

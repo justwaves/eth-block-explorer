@@ -22,7 +22,8 @@ const BlocksContainer = () => {
     lastBlockLoading,
     realtime,
     latestBlockNumber,
-  } = useSelector(({ blocks, loading }) => ({
+    transactionList,
+  } = useSelector(({ blocks, loading, transactions }) => ({
     lastBlockNumber: blocks.lastBlockNumber,
     blockList: blocks.blockList,
     error: blocks.error,
@@ -30,6 +31,7 @@ const BlocksContainer = () => {
     lastBlockLoading: loading['blocks/GET_LAST_BLOCK_NUMBER'],
     blocksLoading: loading['blocks/GET_BLOCK_LIST'],
     latestBlockNumber: blocks.latestBlockNumber,
+    transactionList: transactions.transactionList,
   }));
   const [refresh, setRefresh] = useState(0);
   const subscriptionRef = useRef();
@@ -93,6 +95,7 @@ const BlocksContainer = () => {
     setChecked(!checked);
   }, [checked]);
 
+  // TODO: checked option
   return (
     <Blocks
       blockList={blockList}
@@ -102,9 +105,10 @@ const BlocksContainer = () => {
       id={id}
       closeTransactions={closeTransactions}
       onRealTime={onRealTime}
-      checked={checked}
+      checked={false}
       refresh={refresh}
       latestBlockNumber={latestBlockNumber}
+      transactionListLength={transactionList.length}
     />
   );
 };

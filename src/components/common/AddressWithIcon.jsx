@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { shortenAddress } from 'lib/utils';
 import Blockies from 'components/common/Identicon';
@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   height: 1rem;
+  position: relative;
 `;
 
 const Address = styled.div`
@@ -22,12 +23,32 @@ const Address = styled.div`
     `}
 `;
 
-const AddressWithIcon = ({ address, size, selected }) => {
+const FullAddress = styled.div`
+  position: absolute;
+  top: -1.625rem;
+  background-color: ${props => props.theme.colors.black[3]};
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.375rem;
+  z-index: 9;
+`;
+
+const AddressWithIcon = ({ address, size, selected, hover, noIcon }) => {
+  const [onMouse, setOnMouse] = useState(false);
   const shorten = shortenAddress(address);
 
+  const onMouseEnter = () => {
+    setOnMouse(true);
+  };
+
+  const onMouseLeave = () => {
+    setOnMouse(false);
+  };
+
   return (
-    <Wrapper>
-      <Blockies seed={address} scale={2} />
+    <Wrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {hover && onMouse && <FullAddress>{address}</FullAddress>}
+      {!noIcon && <Blockies seed={address} scale={2} />}
       <Address size={size} selected={selected}>
         {shorten}
       </Address>

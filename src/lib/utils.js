@@ -2,6 +2,7 @@ import range from 'lodash.range';
 import web3 from './web3API';
 
 export const toEther = wei => wei / 1000000000000000000;
+export const toGwei = wei => wei / 1000000000;
 
 export function shortenAddress(address, charsLength = 4) {
   const prefixLength = 2; // "0x"

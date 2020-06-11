@@ -93,7 +93,7 @@ const TxItem = ({ item, hash }) => {
             <Transaction size={16} />
             {shortenHash}
           </TxHash>
-          <Time selected={selected}>{toEther(value).toFixed(2)} Eth</Time>
+          <Time selected={selected}>{toEther(value).toFixed(4)} Eth</Time>
         </div>
         <FromTo selected={selected}>
           <p>from</p>
@@ -111,7 +111,7 @@ const Transactions = ({ error, loading, transactionList, id, hash }) => {
     <ContentLayout
       loading={loading}
       error={error}
-      title={id === '-1' ? 'Latest Transactions' : `Transactions from #${id}`}
+      title={`Transactions from #${id}`}
       blockNumber={id}
     >
       <Pagination items={transactionList}>
