@@ -5,7 +5,7 @@ export default {
     primary: {
       1: '#221ECD',
       2: '#2A72E5',
-      3: '#176EA8',
+      3: '#7986CB;',
     },
     secondary: {
       1: '#FF3D8E',

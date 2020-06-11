@@ -95,7 +95,6 @@ const BlocksContainer = () => {
     setChecked(!checked);
   }, [checked]);
 
-  // TODO: checked option
   return (
     <Blocks
       blockList={blockList}
@@ -105,7 +104,7 @@ const BlocksContainer = () => {
       id={id}
       closeTransactions={closeTransactions}
       onRealTime={onRealTime}
-      checked={false}
+      checked={checked}
       refresh={refresh}
       latestBlockNumber={latestBlockNumber}
       transactionListLength={transactionList.length}

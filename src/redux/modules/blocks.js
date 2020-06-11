@@ -1,9 +1,9 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest, put, call, select, delay } from 'redux-saga/effects';
-import { createRequestActionTypes } from '../../lib/createRequest';
+import { createRequestActionTypes } from 'lib/createRequest';
+import web3 from 'lib/web3API';
+import { fetchBlocks } from 'lib/utils';
 import { startLoading, finishLoading } from './loading';
-import web3 from '../../lib/web3API';
-import { fetchBlocks } from '../../lib/utils';
 import { setTransactionList } from './transactions';
 
 const [
@@ -69,6 +69,7 @@ const getLastBlockNumberSaga = () => {
         },
       });
     } catch (e) {
+      console.log(e);
       yield put({
         type: GET_LAST_BLOCK_NUMBER_FAILURE,
         payload: e,

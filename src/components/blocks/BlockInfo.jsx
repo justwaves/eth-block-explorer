@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import ContentLayout from 'components/layouts/ContentLayout';
-import { shortenAddress } from 'lib/utils';
 import { Cube } from 'components/common/Icons';
 import AddressWithIcon from 'components/common/AddressWithIcon';
 

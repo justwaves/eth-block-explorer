@@ -5,6 +5,7 @@ import { all } from 'redux-saga/effects';
 import loading from './modules/loading';
 import blocks, { blocksSaga } from './modules/blocks';
 import transactions, { transactionsSaga } from './modules/transactions';
+import eth, { ethSaga } from './modules/eth';
 import ui from './modules/ui';
 
 const env = process.env.NODE_ENV;
@@ -14,10 +15,11 @@ const rootReducer = combineReducers({
   blocks,
   transactions,
   ui,
+  eth,
 });
 
 export function* rootSaga() {
-  yield all([blocksSaga(), transactionsSaga()]);
+  yield all([blocksSaga(), transactionsSaga(), ethSaga()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

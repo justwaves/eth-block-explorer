@@ -105,7 +105,7 @@ const ContentLayout = ({
   }
 
   if (error) {
-    return <ContentLayout>error</ContentLayout>;
+    return <Wrapper>error</Wrapper>;
   }
 
   return (
