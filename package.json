@@ -52,5 +52,5 @@
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0"
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "https://eth-block-explorer-server.herokuapp.com/"
 }
