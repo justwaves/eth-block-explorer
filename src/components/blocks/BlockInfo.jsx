@@ -39,7 +39,7 @@ const ItemWrapper = styled.div`
 
 const Key = styled.div`
   color: ${props => props.theme.colors.gray[1]};
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const Value = styled.div`
@@ -122,7 +122,7 @@ const BlockInfo = ({
               }
             />
             <Item name="Transactions" value={block.transactions.length} />
-            <Item name="Valid Transactions" value={transactionListLength} />
+            <Item name="Valid Txns" value={transactionListLength} />
           </Content>
           <ViewTxnsButton onClick={viewTransactions}>
             View All Valid Transactions

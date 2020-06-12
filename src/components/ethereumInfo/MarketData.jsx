@@ -14,13 +14,13 @@ const Wrapper = styled.div`
 const NameAndValueWrapper = styled.div`
   display: grid;
   margin-top: 1.75rem;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  grid-template-columns: 9rem 12rem;
+  gap: 2rem;
 `;
 
 const Name = styled.div`
   color: ${props => props.theme.colors.gray[1]};
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const Value = styled.div`
@@ -60,46 +60,44 @@ const DataViewer = ({ title, children }) => (
   </DataWrapper>
 );
 
-const MarketData = ({ ethInfo }) => {
-  console.log(ethInfo);
-  // const {
-  //   total_supply: totalSupply,
-  //   quote: {
-  //     KRW: {
-  //       price,
-  //       volume_24h: volume24h,
-  //       percent_change_1h: percentChange1h,
-  //       percent_change_24h: percentChange24h,
-  //       percent_change_7d: percentChange7d,
-  //       market_cap: marketCap,
-  //       last_updated: lastUpdated,
-  //     },
-  //   },
-  // } = ethInfo;
-  const totalSupply = 123456;
-  let price = 295287;
-  price = (price - (price % 10)).toLocaleString();
-  let volume24h = 111302002;
-  volume24h = volume24h.toLocaleString();
-  const percentChange1h = 123456;
-  const percentChange24h = 123456;
-  const percentChange7d = 123456;
-  let marketCap = 32866136021128;
-  marketCap = (marketCap - (marketCap % 10)).toLocaleString();
+const MarketData = ({
+  ethInfo,
+  totalDifficulty,
+  totalGasUsed,
+  averageDifficulty,
+  averageGasUsed,
+  // totSupply = 111314473.374,
+  // priceA = 282973.7019417429,
+  // mCap = 31499068610336.35,
+  // volume24 = 14786897539797.104,
+}) => {
+  // console.log(ethInfo);
+
+  const {
+    total_supply: totSupply,
+    quote: {
+      KRW: { price: priceA, volume_24h: volume24, market_cap: mCap },
+    },
+  } = ethInfo;
+
+  const calculatedPrice = (priceA - (priceA % 10)).toLocaleString();
+  const marketCap = (mCap - (mCap % 10)).toLocaleString();
+  const totalSupply = Math.floor(totSupply).toLocaleString();
+  const volume24h = Math.floor(volume24).toLocaleString();
 
   return (
     <Wrapper>
-      <DataViewer title="Market & Block Data">
-        <NameAndValue name="Price" value={`₩ ${price}`} />
-        <NameAndValue name="Total Supply" value={totalSupply} />
+      <DataViewer title="Market & Block Data (by CoinMarketCap)">
+        <NameAndValue name="Price" value={`₩ ${calculatedPrice}`} />
         <NameAndValue name="Market Cap" value={`₩ ${marketCap}`} />
+        <NameAndValue name="Total Supply" value={totalSupply} />
         <NameAndValue name="Volume 24h" value={volume24h} />
       </DataViewer>
       <DataViewer title="Stats for the last 30 blocks">
-        <NameAndValue name="Total Difficulty" value={percentChange1h} />
-        <NameAndValue name="Avarage Difficulty" value={percentChange24h} />
-        <NameAndValue name="Total Gas Used" value={percentChange7d} />
-        <NameAndValue name="Avarage Gas Used" value={percentChange7d} />
+        <NameAndValue name="Total Difficulty" value={totalDifficulty} />
+        <NameAndValue name="Avarage Difficulty" value={averageDifficulty} />
+        <NameAndValue name="Total Gas Used" value={totalGasUsed} />
+        <NameAndValue name="Avarage Gas Used" value={averageGasUsed} />
       </DataViewer>
     </Wrapper>
   );

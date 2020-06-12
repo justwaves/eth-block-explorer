@@ -16,7 +16,7 @@ const IconContainer = styled.div`
   margin-right: 1rem;
 
   svg {
-    fill: ${props => props.theme.colors.primary[1]};
+    fill: ${props => props.theme.colors.gray[1]};
   }
 `;
 
@@ -37,7 +37,7 @@ const ItemWrapper = styled.div`
 
 const Key = styled.div`
   color: ${props => props.theme.colors.gray[1]};
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const Value = styled.div`
@@ -50,7 +50,7 @@ const Value = styled.div`
 `;
 
 const ViewTxnsButton = styled.button`
-  background: ${props => props.theme.colors.primary[1]};
+  background: ${props => props.theme.colors.gray[1]};
   color: white;
   padding: 1rem 2rem;
   margin-top: 3rem;
@@ -58,7 +58,7 @@ const ViewTxnsButton = styled.button`
   border-radius: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
-  cursor: pointer;
+  cursor: not-allowed;
 `;
 
 const Square = styled.div`
@@ -101,7 +101,7 @@ const BlockInfoSkeleton = () => {
           <Item name="Difficulty" />
           <Item name="SHA3 Uncles" />
           <Item name="Transactions" />
-          <Item name="Valid Transactions" />
+          <Item name="Valid Txns" />
         </Content>
         <ViewTxnsButton>View All Valid Transactions</ViewTxnsButton>
       </Wrapper>

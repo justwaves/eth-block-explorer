@@ -17,7 +17,7 @@ const EthInfoHeader = styled.div`
 const IconCotainer = styled.div``;
 
 const EthName = styled.div`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
   margin-left: 1rem;
 `;
@@ -52,6 +52,7 @@ const Item = styled.div`
   border-radius: 4px 4px 0 0;
   position: relative;
   cursor: pointer;
+  max-height: 14rem;
 
   ${props =>
     props.height &&
@@ -153,7 +154,6 @@ const EthereumGraph = ({ blockList }) => {
     });
     setGraphList(arr.slice(0, 30));
   }, [blockList]);
-  console.log(graphList);
 
   return (
     <Wrapper>

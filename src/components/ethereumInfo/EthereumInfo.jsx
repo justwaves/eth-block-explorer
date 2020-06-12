@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Spinner from 'components/common/Spinner';
 import MarketData from './MarketData';
 import EthereumGraph from './EthereumGraph';
+import EthereumInfoSkeleton from './EthereumInfoSkeleton';
 
 const Wrapper = styled.div`
   min-width: ${props => props.theme.width.content};
@@ -23,25 +23,41 @@ const Content = styled.div`
     `}
 `;
 
-const EthereumInfo = ({ loading, error, ethInfo, blockList }) => {
+const EthereumInfo = ({
+  loading,
+  error,
+  ethInfo,
+  blockList,
+  totalDifficulty,
+  totalGasUsed,
+  averageDifficulty,
+  averageGasUsed,
+}) => {
   if (loading) {
-    return (
-      <Wrapper>
-        <Spinner />
-      </Wrapper>
-    );
+    return <EthereumInfoSkeleton />;
   }
 
   if (error) {
     return <Wrapper>error</Wrapper>;
   }
-  console.log(ethInfo);
+
   return (
     <Wrapper>
       <Content>
         {blockList && <EthereumGraph blockList={blockList} />}
-        <MarketData />
-        {/* {ethInfo && <MarketData ethInfo={ethInfo} />} */}
+        {ethInfo &&
+          totalDifficulty &&
+          totalGasUsed &&
+          averageDifficulty &&
+          averageGasUsed && (
+            <MarketData
+              ethInfo={ethInfo}
+              totalDifficulty={totalDifficulty}
+              totalGasUsed={totalGasUsed}
+              averageDifficulty={averageDifficulty}
+              averageGasUsed={averageGasUsed}
+            />
+          )}
       </Content>
     </Wrapper>
   );

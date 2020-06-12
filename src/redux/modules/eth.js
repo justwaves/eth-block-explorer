@@ -19,6 +19,7 @@ const getEthMarketInfoSaga = () => {
 
       const { data } = yield call(getCryptocurrencyInfo);
       const ethInfo = data.data[1];
+      console.log(ethInfo);
 
       yield put({
         type: GET_ETH_MARKET_INFO_SUCCESS,

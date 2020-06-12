@@ -8,17 +8,25 @@ const TransactionInfoContainer = () => {
   const { hash } = useParams();
   const dispatch = useDispatch();
 
-  const { transaction, error, transactionLoading } = useSelector(
-    ({ transactions, loading }) => ({
-      transaction: transactions.transaction,
-      error: transactions.error,
-      transactionLoading: loading['transactions/GET_TRANSACTION_BY_HASH'],
-    }),
-  );
+  const {
+    transaction,
+    error,
+    transactionLoading,
+    transactionsView,
+  } = useSelector(({ transactions, loading, ui }) => ({
+    transaction: transactions.transaction,
+    error: transactions.error,
+    transactionLoading: loading['transactions/GET_TRANSACTION_BY_HASH'],
+    transactionsView: ui.transactionsView,
+  }));
 
   useEffect(() => {
     dispatch(getTransactionByHash({ hash }));
   }, [dispatch, hash]);
+
+  if (!transactionsView) {
+    return null;
+  }
 
   return (
     <div>

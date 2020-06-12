@@ -13,7 +13,7 @@ const IconContainer = styled.div`
   margin-right: 1rem;
 
   svg {
-    fill: ${props => props.theme.colors.secondary[1]};
+    fill: ${props => props.theme.colors.gray[1]};
   }
 `;
 

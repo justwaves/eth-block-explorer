@@ -72,7 +72,7 @@ const ItemWrapper = styled.div`
 
 const BlockNumber = styled.div`
   color: ${props => props.theme.colors.primary[1]};
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.25rem;
   display: flex;
   align-items: center;
