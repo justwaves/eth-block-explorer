@@ -66,7 +66,7 @@ const SideNav = () => {
   return (
     <Wrapper>
       <Navigation>
-        <IconContainer selected={selected === 'home'} to="/block">
+        <IconContainer selected={selected === 'home'} to="/">
           <Home size={22} />
         </IconContainer>
 
