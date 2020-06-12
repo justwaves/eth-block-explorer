@@ -20,6 +20,7 @@ const InputContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 0.5rem;
+  background-color: white;
 `;
 
 const SearchIcon = styled.div`

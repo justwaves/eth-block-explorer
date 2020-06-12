@@ -51,6 +51,5 @@
   "devDependencies": {
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0"
-  },
-  "proxy": "https://eth-block-explorer-server.herokuapp.com/"
+  }
 }

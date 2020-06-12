@@ -151,7 +151,13 @@ const updateBlockListSaga = () => {
       yield delay(3000);
 
       if (blockList && blockList.length !== 0 && blockList[0].number) {
-        console.log(`Fetch ${blockList[0].number + 1} ~ ${newBlockNumber}`);
+        if (blockList[0].number + 1 === newBlockNumber - 1) {
+          console.log(`Fetch ${blockList[0].number + 1}`);
+        } else {
+          console.log(
+            `Fetch ${blockList[0].number + 1} ~ ${newBlockNumber - 1}`,
+          );
+        }
         if (blockList[0].number + 1 < newBlockNumber) {
           const latestBlockList = yield call(
             fetchBlocks,
@@ -159,7 +165,7 @@ const updateBlockListSaga = () => {
             newBlockNumber,
           );
           latestBlockList.filter(block => block !== null);
-          console.log(...latestBlockList);
+          console.log(latestBlockList);
 
           yield delay(2000);
           const newBlockList = blockList
