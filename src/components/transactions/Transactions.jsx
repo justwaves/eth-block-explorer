@@ -21,6 +21,10 @@ const ItemWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
 
+  &:hover {
+    box-shadow: ${props => props.theme.boxShadowHover};
+  }
+
   ${props =>
     props.selected &&
     css`

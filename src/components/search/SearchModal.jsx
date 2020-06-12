@@ -38,7 +38,7 @@ const ModalWrapper = styled.div`
 const ModalInner = styled.div`
   box-sizing: border-box;
   position: relative;
-  background-color: #fff;
+  /* background-color: #fff; */
   border-radius: 10px;
   min-width: 360px;
   top: -30%;

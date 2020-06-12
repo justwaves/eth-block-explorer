@@ -57,6 +57,10 @@ const ViewTxnsButton = styled.button`
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+
+  &:hover {
+    background: ${props => props.theme.colors.primary[2]};
+  }
 `;
 
 const Item = ({ name, value }) => {

@@ -38,11 +38,8 @@ export const ArrowRight = props => (
 
 export const Home = props => (
   <SVG {...props}>
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M21 8.772l-6.98-6.979a3 3 0 00-4.242 0L3 8.571v14.515h7v-6a2 2 0 114 0v6h7V8.772zm-9.808-5.565L5 9.4v11.686h3v-4a4 4 0 018 0v4h3V9.6l-6.393-6.394a1 1 0 00-1.415 0z"
-    />
+    <path d="M21 8.772l-6.98-6.979a3 3 0 00-4.242 0L3 8.571v14.515h7v-6a2 2 0 114 0v6h7V8.772zm-9.808-5.565L5 9.4v11.686h3v-4a4 4 0 018 0v4h3V9.6l-6.393-6.394a1 1 0 00-1.415 0z" />
+    <path d="M5 9.4l6.192-6.193a1 1 0 011.415 0L19 9.601v11.485h-3v-4a4 4 0 00-8 0v4H5V9.4z" />
   </SVG>
 );
 

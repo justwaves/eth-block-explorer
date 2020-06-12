@@ -13,17 +13,14 @@ const Main = () => {
   return (
     <PageLayout>
       <SearchModal />
+      <Block />
       {id ? (
         <>
-          <Block />
           <BlockInfo />
           <Transactions />
         </>
       ) : (
-        <>
-          <Block />
-          <EthereumInfo />
-        </>
+        <EthereumInfo />
       )}
       {hash && <TransactionInfoContainer />}
     </PageLayout>

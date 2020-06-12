@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Search } from 'components/common/Icons';
 
 const Wrapper = styled.div`
@@ -36,17 +36,46 @@ const SearchInput = styled.input`
   padding: 0.25rem 1rem;
 `;
 
-const SearchBox = () => {
+const SearchForm = styled.form`
+  width: 100%;
+`;
+
+const Error = styled.div`
+  margin-top: 0.75rem;
+  margin-left: 1.5rem;
+  color: ${props => props.theme.colors.red};
+  position: absolute;
+  bottom: -2rem;
+  left: 0;
+  display: none;
+
+  ${props =>
+    props.showError &&
+    css`
+      display: block;
+    `}
+`;
+
+const SearchBox = ({ onSubmit, inputValue, onChange, showError }) => {
   return (
     <Wrapper>
       <InputContainer>
-        <SearchInput placeholder="Search block" />
-        <SearchIcon>
+        <SearchForm onSubmit={onSubmit}>
+          <SearchInput
+            placeholder="Search block"
+            value={inputValue}
+            name="search"
+            onChange={onChange}
+            autoComplete="off"
+          />
+        </SearchForm>
+        <SearchIcon onClick={onSubmit}>
           <Search />
         </SearchIcon>
       </InputContainer>
+      <Error showError={showError}>{`There is no block # ${showError}`}</Error>
     </Wrapper>
   );
 };
 
-export default SearchBox;
+export default React.memo(SearchBox);

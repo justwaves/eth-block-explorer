@@ -49,5 +49,6 @@ export default {
   },
 
   boxShadow: '0px 4px 8px rgba(158, 158, 158, 0.25)',
+  boxShadowHover: '0px 6px 10px rgba(158, 158, 158, 0.5)',
   borderRadius: '0.5rem',
 };

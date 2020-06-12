@@ -35,7 +35,7 @@ const EthereumInfo = ({ loading, error, ethInfo, blockList }) => {
   if (error) {
     return <Wrapper>error</Wrapper>;
   }
-
+  console.log(ethInfo);
   return (
     <Wrapper>
       <Content>

@@ -37,27 +37,28 @@ const PER_PAGE = 7;
 const Pagination = ({ items, children }) => {
   const [paginatedItems, setPaginatedItems] = useState([]);
   const [paginationStartS, setPaginationStartS] = useState(1);
-  const [paginationEndS, setPaginationEndS] = useState(10);
+  const [paginationEndS, setPaginationEndS] = useState(PER_PAGE);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     let paginationEnd =
-      items.length > 10 ? currentPage * PER_PAGE : items.length;
+      items.length > PER_PAGE ? currentPage * PER_PAGE : items.length;
 
     if (paginationEnd > items.length) {
       paginationEnd = items.length;
     }
 
-    let paginationStart = items.length > 10 ? paginationEnd - PER_PAGE + 1 : 1;
+    let paginationStart =
+      items.length > PER_PAGE ? paginationEnd - PER_PAGE + 1 : 1;
 
     if (paginationEnd === items.length) {
-      const remaining = paginationEnd % 10;
+      const remaining = paginationEnd % PER_PAGE;
       if (remaining !== 0) {
         paginationStart = paginationEnd - remaining;
       }
     }
 
-    if (paginationEnd < 10) {
+    if (paginationEnd < PER_PAGE) {
       paginationStart = 1;
     }
 
