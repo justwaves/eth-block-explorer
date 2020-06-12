@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import ContentLayout from 'components/layouts/ContentLayout';
@@ -80,6 +80,17 @@ const BlockInfo = ({
   blocksLoading,
   transactionListLength,
 }) => {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    if (block) {
+      const t = moment.unix(block.timestamp).utc().format('lll');
+      console.log(t);
+
+      setTime(t);
+    }
+  }, [block]);
+
   return (
     <ContentLayout
       title="Block Information"
@@ -97,10 +108,7 @@ const BlockInfo = ({
           </BlockNumber>
           <Content>
             <Item name="State" value={block.nonce ? 'Success' : 'Pending'} />
-            <Item
-              name="Timestamp"
-              value={moment(block.timestamp).format('lll')}
-            />
+            <Item name="Timestamp" value={time} />
             <Item
               name="Miner"
               value={<AddressWithIcon address={block.miner} hover />}
