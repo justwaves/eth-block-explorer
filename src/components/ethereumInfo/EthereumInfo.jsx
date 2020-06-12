@@ -38,7 +38,36 @@ const EthereumInfo = ({
   }
 
   if (error) {
-    return <Wrapper>error</Wrapper>;
+    return (
+      <Wrapper>
+        {blockList && (
+          <Content>
+            <EthereumGraph blockList={blockList} />
+            {totalDifficulty &&
+              totalGasUsed &&
+              averageDifficulty &&
+              averageGasUsed && (
+                <MarketData
+                  ethInfo={{
+                    total_supply: 'error',
+                    quote: {
+                      KRW: {
+                        price: 'error',
+                        volume_24h: 'error',
+                        market_cap: 'error',
+                      },
+                    },
+                  }}
+                  totalDifficulty={totalDifficulty}
+                  totalGasUsed={totalGasUsed}
+                  averageDifficulty={averageDifficulty}
+                  averageGasUsed={averageGasUsed}
+                />
+              )}
+          </Content>
+        )}
+      </Wrapper>
+    );
   }
 
   return (
