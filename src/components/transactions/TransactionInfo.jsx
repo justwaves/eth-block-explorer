@@ -89,12 +89,12 @@ const TransactionInfo = ({ loading, error, transaction }) => {
               value={`${toEther(transaction.value).toFixed(4)} Eth`}
             />
             <Item name="BlockNumber" value={`#${transaction.blockNumber} `} />
-            <Item name="Nonce" value={transaction.nonce} />
+            <Item name="Nonce" value={transaction.nonce.toLocaleString()} />
             <Item
               name="Gas Price"
               value={`${toGwei(transaction.gasPrice)} Gwei`}
             />
-            <Item name="Gas Used" value={transaction.gas} />
+            <Item name="Gas Used" value={transaction.gas.toLocaleString()} />
             <Item
               name="Tx Fee"
               value={`${toEther(transaction.gasPrice * transaction.gas).toFixed(

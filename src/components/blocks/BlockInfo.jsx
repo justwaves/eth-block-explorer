@@ -117,9 +117,12 @@ const BlockInfo = ({
             />
             <Item name="Nonce" value={block.nonce} />
             <Item name="Size" value={`${block.size} bytes`} />
-            <Item name="Gas Used" value={block.gasUsed} />
-            <Item name="Gas Limit" value={block.gasLimit} />
-            <Item name="Difficulty" value={block.difficulty} />
+            <Item name="Gas Used" value={block.gasUsed.toLocaleString()} />
+            <Item name="Gas Limit" value={block.gasLimit.toLocaleString()} />
+            <Item
+              name="Difficulty"
+              value={parseInt(block.difficulty, 10).toLocaleString()}
+            />
             {/* <Item name="Extra Data" value={block.extraData} /> */}
             <Item
               name="SHA3 Uncles"

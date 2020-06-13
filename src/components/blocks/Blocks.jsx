@@ -164,6 +164,7 @@ const Blocks = ({
       error={error}
       toggle={<Toggle checked={checked} onClick={onRealTime} />}
       toggleLabel="Real time"
+      blocksView
     >
       <Pagination items={blockList}>
         {paginatedItems =>

@@ -19,9 +19,19 @@ const Button = styled.button`
   border: 0;
   outline: 0;
   margin: 0 0.25rem;
-  cursor: pointer;
   padding: 0.25rem 0.5rem;
   background-color: white;
+  font-weight: 500;
+
+  ${props =>
+    !props.disabled &&
+    css`
+      cursor: pointer;
+      &:hover {
+        text-shadow: 0 0 0.01px ${props.theme.colors.black[1]},
+          0 0 0.01px ${props.theme.colors.black[1]};
+      }
+    `}
 
   ${props =>
     props.disabled &&

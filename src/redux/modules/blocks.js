@@ -155,7 +155,7 @@ const updateBlockListSaga = () => {
           console.log(`Fetch #${blockList[0].number + 1}`);
         } else {
           console.log(
-            `Fetch block #${blockList[0].number + 1} ~ #${newBlockNumber - 1}`,
+            `Fetch #${blockList[0].number + 1} ~ #${newBlockNumber - 1}`,
           );
         }
         if (blockList[0].number + 1 < newBlockNumber) {

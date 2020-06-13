@@ -1,9 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useHistory } from 'react-router';
 import Spinner from 'components/common/Spinner';
 import Toggle from 'components/common/Toggle';
 import BlockInfoSkeleton from 'components/blocks/BlockInfoSkeleton';
 import TransactionInfoSkeleton from 'components/transactions/TransactionInfoSkeleton';
+import { Refresh } from 'components/common/Icons';
 
 const Wrapper = styled.div`
   width: ${props => props.theme.width.content};
@@ -64,6 +66,23 @@ const Content = styled.div`
     `}
 `;
 
+const ErrorContainer = styled.div`
+  min-height: 44.75rem;
+  margin-top: 6.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  div {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
 const ContentLayout = ({
   title,
   children,
@@ -72,7 +91,14 @@ const ContentLayout = ({
   error,
   toggle,
   toggleLabel,
+  blocksView,
 }) => {
+  const history = useHistory();
+
+  const onClick = () => {
+    history.go();
+  };
+
   if (info && loading) {
     return (
       <Wrapper>
@@ -104,9 +130,18 @@ const ContentLayout = ({
     );
   }
 
-  if (error) {
-    return <Wrapper>error</Wrapper>;
+  if (error && blocksView) {
+    return (
+      <Wrapper>
+        <ErrorContainer>
+          <div>Retry</div>
+          <Refresh size={32} onClick={onClick} />
+        </ErrorContainer>
+      </Wrapper>
+    );
   }
+
+  if (error) return null;
 
   return (
     <Wrapper>
