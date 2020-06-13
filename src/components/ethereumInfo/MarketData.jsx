@@ -103,4 +103,4 @@ const MarketData = ({
   );
 };
 
-export default MarketData;
+export default React.memo(MarketData);

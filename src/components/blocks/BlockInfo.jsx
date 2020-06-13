@@ -63,14 +63,14 @@ const ViewTxnsButton = styled.button`
   }
 `;
 
-const Item = ({ name, value }) => {
+const Item = React.memo(({ name, value }) => {
   return (
     <ItemWrapper>
       <Key>{name}</Key>
       <Value>{value}</Value>
     </ItemWrapper>
   );
-};
+});
 
 const BlockInfo = ({
   block,
@@ -139,4 +139,4 @@ const BlockInfo = ({
   );
 };
 
-export default BlockInfo;
+export default React.memo(BlockInfo);

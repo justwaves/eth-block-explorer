@@ -108,4 +108,4 @@ const TransactionInfo = ({ loading, error, transaction }) => {
   );
 };
 
-export default TransactionInfo;
+export default React.memo(TransactionInfo);

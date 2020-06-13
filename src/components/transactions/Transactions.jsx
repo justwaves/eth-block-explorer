@@ -83,7 +83,7 @@ const FromTo = styled.div`
   }
 `;
 
-const TxItem = ({ item, hash }) => {
+const TxItem = React.memo(({ item, hash }) => {
   const selected = hash === item.hash;
   const { hash: itemHash, from, to, value, blockNumber } = item;
 
@@ -108,7 +108,7 @@ const TxItem = ({ item, hash }) => {
       </ItemWrapper>
     </StyledLink>
   );
-};
+});
 
 const Transactions = ({ error, loading, transactionList, id, hash }) => {
   return (
@@ -129,4 +129,4 @@ const Transactions = ({ error, loading, transactionList, id, hash }) => {
   );
 };
 
-export default Transactions;
+export default React.memo(Transactions);

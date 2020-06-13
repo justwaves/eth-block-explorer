@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 const Text = styled.div`
   font-size: 0.875rem;
-  width: 7rem;
+  width: 10rem;
   text-align: center;
 `;
 

@@ -113,7 +113,7 @@ const Count = styled.div`
   justify-content: center;
 `;
 
-const GraphItem = ({ blockNumber, transactionCount }) => {
+const GraphItem = React.memo(({ blockNumber, transactionCount }) => {
   const [onMouse, setOnMouse] = useState(false);
 
   const onMouseEnter = () => {
@@ -140,7 +140,7 @@ const GraphItem = ({ blockNumber, transactionCount }) => {
       </StyledLink>
     </ItemWrapper>
   );
-};
+});
 
 const EthereumGraph = ({ blockList }) => {
   const [graphList, setGraphList] = useState(null);
@@ -178,4 +178,4 @@ const EthereumGraph = ({ blockList }) => {
   );
 };
 
-export default EthereumGraph;
+export default React.memo(EthereumGraph);

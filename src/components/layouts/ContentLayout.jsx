@@ -126,4 +126,4 @@ const ContentLayout = ({
   );
 };
 
-export default ContentLayout;
+export default React.memo(ContentLayout);
