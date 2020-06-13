@@ -49,12 +49,12 @@ const EthereumInfo = ({
               averageGasUsed && (
                 <MarketData
                   ethInfo={{
-                    total_supply: 'error',
+                    total_supply: 111327369,
                     quote: {
                       KRW: {
-                        price: 'error',
-                        volume_24h: 'error',
-                        market_cap: 'error',
+                        price: 284860,
+                        volume_24h: 10082203617212,
+                        market_cap: 31711840548210,
                       },
                     },
                   }}

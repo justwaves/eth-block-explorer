@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { shortenAddress } from 'lib/utils';
-import Blockies from 'components/common/Identicon';
+import Blockies from 'react-blockies';
 
 const Wrapper = styled.div`
   display: flex;

@@ -84,9 +84,7 @@ const BlockInfo = ({
 
   useEffect(() => {
     if (block) {
-      const t = moment.unix(block.timestamp).utc().format('lll');
-      console.log(t);
-
+      const t = moment.unix(block.timestamp).format('lll');
       setTime(t);
     }
   }, [block]);
