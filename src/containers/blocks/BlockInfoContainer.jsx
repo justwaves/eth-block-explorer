@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getBlockById } from 'redux/modules/blocks';
-import { showTransactions } from 'redux/modules/ui';
+import { showTransactions, hideTransactions } from 'redux/modules/ui';
 import BlockInfo from 'components/blocks/BlockInfo';
 import { unloadTransactionList } from 'redux/modules/transactions';
 
@@ -27,6 +27,7 @@ const BlockInfoContainer = () => {
     dispatch(getBlockById({ id }));
     return () => {
       dispatch(unloadTransactionList());
+      dispatch(hideTransactions());
     };
   }, [dispatch, id]);
 
