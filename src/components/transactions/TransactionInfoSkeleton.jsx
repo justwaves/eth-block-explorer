@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Skeleton from 'react-loading-skeleton';
 import ContentLayout from 'components/layouts/ContentLayout';
 import { Transaction } from 'components/common/Icons';
 
@@ -40,7 +41,6 @@ const Key = styled.div`
 const Value = styled.div`
   color: ${props => props.theme.colors.black[3]};
   font-weight: 500;
-  background-color: ${props => props.theme.colors.gray[5]};
   border-radius: 0.125rem;
   width: 50%;
 `;
@@ -48,7 +48,6 @@ const Value = styled.div`
 const Square = styled.div`
   width: 9rem;
   height: 1.365rem;
-  background: ${props => props.theme.colors.gray[5]};
   border-radius: 0.25rem;
 `;
 
@@ -56,7 +55,10 @@ const Item = ({ name }) => {
   return (
     <ItemWrapper>
       <Key>{name}</Key>
-      <Value />
+
+      <Value>
+        <Skeleton />
+      </Value>
     </ItemWrapper>
   );
 };
@@ -69,7 +71,9 @@ const TransactionInfoSkeleton = () => {
           <Transaction />
         </IconContainer>
         <Number>
-          <Square />
+          <Square>
+            <Skeleton />
+          </Square>
         </Number>
       </BlockNumber>
       <Content>

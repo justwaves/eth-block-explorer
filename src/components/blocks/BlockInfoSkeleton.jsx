@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Skeleton from 'react-loading-skeleton';
 import ContentLayout from 'components/layouts/ContentLayout';
 import { Cube } from 'components/common/Icons';
 
@@ -64,7 +65,6 @@ const ViewTxnsButton = styled.button`
 const Square = styled.div`
   width: 7.5rem;
   height: 1.365rem;
-  background: ${props => props.theme.colors.gray[5]};
   border-radius: 0.25rem;
 `;
 
@@ -72,7 +72,9 @@ const Item = ({ name }) => {
   return (
     <ItemWrapper>
       <Key>{name}</Key>
-      <Value />
+      <Value>
+        <Skeleton />
+      </Value>
     </ItemWrapper>
   );
 };
@@ -86,7 +88,9 @@ const BlockInfoSkeleton = () => {
             <Cube />
           </IconContainer>
           <Number>
-            <Square />
+            <Square>
+              <Skeleton />
+            </Square>
           </Number>
         </BlockNumber>
         <Content>

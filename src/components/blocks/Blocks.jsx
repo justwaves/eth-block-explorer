@@ -40,9 +40,11 @@ const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: all 0.2s;
 
   &:hover {
     box-shadow: ${props => props.theme.boxShadowHover};
+    transform: translateY(-4px);
   }
 
   ${props =>

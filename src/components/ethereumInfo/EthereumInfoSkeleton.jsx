@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Ethereum } from 'components/common/Icons';
 import { Link } from 'react-router-dom';
 import range from 'lodash.range';
+import Skeleton from 'react-loading-skeleton';
 
 const Wrapper = styled.div`
   min-width: ${props => props.theme.width.content};
@@ -61,10 +62,10 @@ const ItemWrapper = styled.div`
 
 const Item = styled.div`
   width: 0.75rem;
-  background-color: ${props => props.theme.colors.gray[5]};
+  /* background-color: ${props => props.theme.colors.gray[5]}; */
   border-radius: 4px 4px 0 0;
   position: relative;
-  height: 7rem;
+  height: 10rem;
 `;
 
 const MarketDataWrapper = styled.div`
@@ -90,14 +91,16 @@ const Name = styled.div`
 `;
 
 const Value = styled.div`
-  background-color: ${props => props.theme.colors.gray[5]};
+  /* background-color: ${props => props.theme.colors.gray[5]}; */
   width: 9rem;
 `;
 
 const NameAndValue = ({ name }) => (
   <NameAndValueWrapper>
     <Name>{name}</Name>
-    <Value />
+    <Value>
+      <Skeleton />
+    </Value>
   </NameAndValueWrapper>
 );
 
@@ -130,7 +133,9 @@ const GraphItem = () => {
   return (
     <ItemWrapper>
       <StyledLink>
-        <Item />
+        <Item>
+          <Skeleton height={160} />
+        </Item>
       </StyledLink>
     </ItemWrapper>
   );
@@ -159,6 +164,7 @@ const EthereumInfoSkeleton = () => {
         <MarketDataWrapper>
           <DataViewer title="Market & Block Data (by CoinMarketCap)">
             <NameAndValue name="Price" />
+
             <NameAndValue name="Market Cap" />
             <NameAndValue name="Total Supply" />
             <NameAndValue name="Volume 24h" />
